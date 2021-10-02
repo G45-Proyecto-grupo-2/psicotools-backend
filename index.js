@@ -9,16 +9,22 @@
 /* Require */
 const express = require('express')
 const app = express()
-const port = 3000
+var morgan = require('morgan')
+/* Database */
+const db = "mongodb://"
 
 /* Middlewares */
-
+app.use(morgan("dev"));
 
 /* Config */
+app.set('PORT', process.env.PORT || 3000);
+
+/* API */
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Respuesta del desde el servidor')
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+/* PORT */
+app.listen(app.get('PORT'), () => {
+  console.log(`Example app listening at http://localhost:${app.get('PORT')}`)
+});
