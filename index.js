@@ -7,24 +7,33 @@
 
 
 /* Require */
-const express = require('express')
+const express = require('express');
+const mongoose = require('mongoose');
 const app = express()
 var morgan = require('morgan')
-/* Database */
-const db = "mongodb://"
+const cors = require('cors')
 
 /* Middlewares */
 app.use(morgan("dev"));
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
 
 /* Config */
 app.set('PORT', process.env.PORT || 3000);
+const passworddb = 'JX5gprpKZmjVVNnC';
+const databaseName = 'Psicotools-api';
 
-/* API */
-app.get('/', (req, res) => {
-  res.send('Respuesta del desde el servidor')
-})
+async function main() {
+  await mongoose.connect(`mongodb+srv://jhll:${passworddb}@psicotools-api.05awz.mongodb.net/${databaseName}?retryWrites=true&w=majority`);
+}
+
+main().catch((err) => console.log(err));
 
 /* PORT */
 app.listen(app.get('PORT'), () => {
   console.log(`Example app listening at http://localhost:${app.get('PORT')}`)
 });
+
+// API
