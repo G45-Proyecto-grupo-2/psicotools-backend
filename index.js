@@ -29,7 +29,7 @@ async function main() {
   await mongoose.connect(`mongodb+srv://jhll:${passworddb}@psicotools-api.05awz.mongodb.net/${databaseName}?retryWrites=true&w=majority`);
 }
 
-main().catch((err) => console.log(err));
+main().then((resolved)=>{console.log("base de datos conectada")}).catch((err) => console.log(err));
 
 /* PORT */
 app.listen(app.get('PORT'), () => {
